@@ -43,12 +43,15 @@ require('packer').startup(function(use)
     after = 'nvim-treesitter',
   }
 
+
+
   -- Git related plugins
   use 'tpope/vim-fugitive'
   use 'tpope/vim-rhubarb'
   use 'lewis6991/gitsigns.nvim'
 
-  use {'ellisonleao/gruvbox.nvim'}
+  -- use {'ellisonleao/gruvbox.nvim'}
+  use 'folke/tokyonight.nvim'
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
   use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
@@ -62,10 +65,18 @@ require('packer').startup(function(use)
 
 
   use {
-	  "windwp/nvim-autopairs",
+    "windwp/nvim-autopairs",
     config = function() require("nvim-autopairs").setup {} end
   }
 
+  use {
+    "windwp/nvim-ts-autotag",
+    wants = "nvim-treesitter",
+    event = "InsertEnter",
+    config = function()
+      require("nvim-ts-autotag").setup { enable = true }
+    end,
+  }
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
   if has_plugins then
@@ -129,7 +140,7 @@ vim.opt.scrolloff = 8
 -- Set colorscheme
 vim.o.termguicolors = true
 vim.o.background = "dark"
-vim.cmd [[colorscheme gruvbox]]
+vim.cmd [[colorscheme tokyonight-night]]
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
@@ -175,7 +186,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 require('lualine').setup {
   options = {
     icons_enabled = false,
-    theme = 'gruvbox',
+    theme = 'tokyonight',
     component_separators = '|',
     section_separators = '',
   },
@@ -241,6 +252,10 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
   ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'help', 'vim' },
+
+  autotag = {
+    enable = true
+  },
 
   highlight = { enable = true },
   indent = { enable = true, disable = { 'python' } },
