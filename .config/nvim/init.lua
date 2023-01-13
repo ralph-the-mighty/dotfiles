@@ -1,4 +1,9 @@
 -- Install packer
+
+vim.g.loadednetrw = 1
+vim.g.loadednetrwPlugin = 1
+
+
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 local is_bootstrap = false
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
@@ -77,6 +82,15 @@ require('packer').startup(function(use)
       require("plugins.config.treesitter")
     end,
   }
+
+  use {
+    'nvim-tree/nvim-tree.lua',
+    requires = {
+      'nvim-tree/nvim-web-devicons', -- optional, for file icons
+    },
+    tag = 'nightly' -- optional, updated every week. (see issue #1193)
+  }
+
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
   if has_plugins then
@@ -227,6 +241,27 @@ require('telescope').setup {
     },
   },
 }
+
+-- Configure NvimTree
+require("nvim-tree").setup({
+  sort_by = "case_sensitive",
+  view = {
+    adaptive_size = true,
+    mappings = {
+      list = {
+        { key = "u", action = "dir_up" },
+      },
+    },
+  },
+  renderer = {
+    group_empty = true,
+  },
+  filters = {
+    dotfiles = true,
+  },
+})
+
+vim.keymap.set('n', '<leader>b', require('nvim-tree').toggle)
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
