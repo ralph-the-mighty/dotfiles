@@ -63,7 +63,6 @@ require('packer').startup(function(use)
   -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
 
-
   use {
     "windwp/nvim-autopairs",
     config = function() require("nvim-autopairs").setup {} end
@@ -75,6 +74,7 @@ require('packer').startup(function(use)
     event = "InsertEnter",
     config = function()
       require("nvim-ts-autotag").setup { enable = true }
+      require("plugins.config.treesitter")
     end,
   }
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
@@ -222,6 +222,7 @@ require('telescope').setup {
       i = {
         ['<C-u>'] = false,
         ['<C-d>'] = false,
+        ['jk'] = require('telescope.actions').close
       },
     },
   },
@@ -254,7 +255,10 @@ require('nvim-treesitter.configs').setup {
   ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'help', 'vim' },
 
   autotag = {
-    enable = true
+    enable = true,
+    filetypes = {
+      'html', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact'
+    }
   },
 
   highlight = { enable = true },
