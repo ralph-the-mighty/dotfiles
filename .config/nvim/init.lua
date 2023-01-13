@@ -75,12 +75,11 @@ require('packer').startup(function(use)
 
   use {
     "windwp/nvim-ts-autotag",
-    wants = "nvim-treesitter",
-    event = "InsertEnter",
-    config = function()
-      require("nvim-ts-autotag").setup { enable = true }
-      require("plugins.config.treesitter")
-    end,
+    -- wants = "nvim-treesitter",
+    -- event = "InsertEnter",
+    -- config = function()
+    --   require("nvim-ts-autotag").setup { enable = true }
+    -- end,
   }
 
   use {
