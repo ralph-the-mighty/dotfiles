@@ -127,6 +127,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 
 -- Set highlight on search
 vim.o.hlsearch = false
+vim.o.incsearch = true
 
 -- Make line numbers default
 vim.wo.number = true
@@ -161,6 +162,19 @@ vim.o.completeopt = 'menuone,noselect'
 
 vim.o.number = true
 vim.o.relativenumber = true
+
+vim.o.tabstop = 2
+vim.o.softtabstop = 2
+vim.o.shiftwidth = 2
+vim.o.expandtab = true
+
+vim.o.smartindent = true
+
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.opt.undofile = true
+
 
 -- [[ Basic Keymaps ]]
 -- set <space> as the leader key
