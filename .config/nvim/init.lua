@@ -195,8 +195,12 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 
 vim.keymap.set('i', 'jk', '<ESC>')
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
-vim.keymap.set('n' , 'J', ":m '>+1<CR>gv=gv")
-vim.keymap.set('n' , 'K', ":m '>-2<CR>gv=gv")
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', 'K', ":m '>-2<CR>gv=gv")
+
+vim.keymap.set('n', '<leader>y', '"+y')
+vim.keymap.set('v', '<leader>y', '"+y')
+vim.keymap.set('n', '<leader>Y', '"+Y')
 
 
 -- [[ Highlight on yank ]]
@@ -429,7 +433,7 @@ local servers = {
   clangd = {},
   -- gopls = {},
   pyright = {},
-  -- rust_analyzer = {},
+  rust_analyzer = {},
   tsserver = {},
 
   sumneko_lua = {
