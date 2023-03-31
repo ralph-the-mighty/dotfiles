@@ -58,6 +58,7 @@ require('packer').startup(function(use)
   -- Color schemes
   use {'ellisonleao/gruvbox.nvim'}
   use {'nyoom-engineering/oxocarbon.nvim'}
+  use { "bluz71/vim-moonfly-colors", as = "moonfly" }
   use 'folke/tokyonight.nvim'
 
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
@@ -157,7 +158,7 @@ vim.opt.scrolloff = 8
 -- Set colorscheme
 vim.o.termguicolors = true
 vim.o.background = "dark"
-vim.cmd [[colorscheme tokyonight-night]]
+vim.cmd [[colorscheme moonfly]]
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
